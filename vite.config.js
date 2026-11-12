@@ -11,7 +11,7 @@ function userPanelBanner() {
         const port = typeof addr === 'object' && addr ? addr.port : addr
         // eslint-disable-next-line no-console
         console.log(
-          `\n  ✅ CRM USER PANEL → http://localhost:${port}/login\n  (If you see cyan Admin UI, you opened the wrong app — often :5173)\n`,
+          `\n  ✅ CRM USER PANEL → http://localhost:${port}/login\n`,
         )
       })
     },
@@ -19,10 +19,15 @@ function userPanelBanner() {
 }
 
 export default defineConfig({
+  base: '/',
   plugins: [react(), tailwindcss(), userPanelBanner()],
   server: {
     port: 5310,
     strictPort: false,
     open: '/login',
+  },
+  preview: {
+    port: 5310,
+    strictPort: false,
   },
 })

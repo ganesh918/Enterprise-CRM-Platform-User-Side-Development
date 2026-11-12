@@ -18,8 +18,10 @@ import { ReportsPage } from "./pages/ReportsPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { SignupPage } from "./pages/SignupPage";
 import { TasksPage } from "./pages/TasksPage";
+import { ScrollToTop } from "./components/routing/ScrollToTop";
 function App() {
   return /* @__PURE__ */ jsxs(Routes, { children: [
+    /* @__PURE__ */ jsx(ScrollToTop, {}),
     /* @__PURE__ */ jsx(Route, { path: "/login", element: /* @__PURE__ */ jsx(LoginPage, {}) }),
     /* @__PURE__ */ jsx(Route, { path: "/signup", element: /* @__PURE__ */ jsx(SignupPage, {}) }),
     /* @__PURE__ */ jsx(Route, { path: "/forgot-password", element: /* @__PURE__ */ jsx(ForgotPasswordPage, {}) }),
