@@ -33,6 +33,28 @@ function readStoredAuth() {
   }
 }
 
+/** Normalize auth in storage so Vercel and localhost hydrate the same workspace. */
+export function migrateStoredAuth() {
+  try {
+    const remember = Boolean(localStorage.getItem(AUTH_STORAGE_KEY))
+    const raw =
+      localStorage.getItem(AUTH_STORAGE_KEY) ??
+      sessionStorage.getItem(AUTH_STORAGE_KEY)
+    if (!raw) return
+
+    const parsed = JSON.parse(raw)
+  const user = normalizeUser(parsed)
+    if (!user) return
+
+    const next = JSON.stringify(user)
+    if (next === raw) return
+
+    persistUser(user, remember)
+  } catch {
+    // ignore
+  }
+}
+
 const stored = readStoredAuth()
 
 const initialState = {

@@ -52,7 +52,7 @@ After GitHub is connected, redeploy **main**. Open your site at **`/`** or **`/l
 ### Localhost vs Vercel looks different?
 
 1. **Redeploy** after the latest `vercel.json` (static `/assets/*` must not rewrite to HTML).
-2. **Same data:** CRM lists are stored in browser `localStorage` (`nexus-crm-user-v2`). Local dev may have old edits; Vercel is fresh until you log in and use the app. Clear site data on both to compare equally.
+2. **Same data:** CRM lists live in browser `localStorage` (`nexus-crm-user-v3`). Each origin (localhost vs `*.vercel.app`) has its own storage. After deploy, sign in on Vercel once — the app reseeds if saved data does not match your workspace (`tm_2` by default). Use the **same email** on both for identical scoping.
 3. **Same login:** use the same email on both; role shows as **CRM User** by default.
 4. **Test production build locally:** `npm run build` then `npm run preview` → should match Vercel.
 

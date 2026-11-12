@@ -33,6 +33,12 @@ const customersSlice = createSlice({
     },
     deleteCustomer(state, action) {
       state.items = state.items.filter((c) => c.id !== action.payload);
+    },
+    resetFromSeed(state) {
+      state.items = initialCustomers;
+      state.search = "";
+      state.loading = false;
+      state.error = null;
     }
   }
 });
@@ -42,7 +48,8 @@ const {
   setCustomersError,
   addCustomer,
   updateCustomer,
-  deleteCustomer
+  deleteCustomer,
+  resetFromSeed
 } = customersSlice.actions;
 const selectAllCustomers = (state) => state.customers.items;
 const selectCustomerById = (id) => (state) => state.customers.items.find((c) => c.id === id);
@@ -71,5 +78,6 @@ export {
   setCustomerSearch,
   setCustomersError,
   setCustomersLoading,
-  updateCustomer
+  updateCustomer,
+  resetFromSeed
 };

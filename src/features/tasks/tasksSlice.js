@@ -39,6 +39,12 @@ const tasksSlice = createSlice({
     },
     deleteTask(state, action) {
       state.items = state.items.filter((t) => t.id !== action.payload);
+    },
+    resetFromSeed(state) {
+      state.items = initialTasks;
+      state.filter = "all";
+      state.loading = false;
+      state.error = null;
     }
   }
 });
@@ -49,7 +55,8 @@ const {
   addTask,
   updateTask,
   toggleTaskStatus,
-  deleteTask
+  deleteTask,
+  resetFromSeed
 } = tasksSlice.actions;
 const selectAllTasks = (state) => state.tasks.items;
 const selectTaskFilter = (state) => state.tasks.filter;
@@ -80,5 +87,6 @@ export {
   setTasksError,
   setTasksLoading,
   toggleTaskStatus,
-  updateTask
+  updateTask,
+  resetFromSeed
 };

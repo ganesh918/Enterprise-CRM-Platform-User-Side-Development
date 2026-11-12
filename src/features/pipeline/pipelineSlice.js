@@ -45,6 +45,11 @@ const pipelineSlice = createSlice({
     },
     setPipelineError(state, action) {
       state.error = action.payload;
+    },
+    resetFromSeed(state) {
+      state.deals = initialDeals;
+      state.loading = false;
+      state.error = null;
     }
   }
 });
@@ -54,7 +59,8 @@ const {
   updateDeal,
   deleteDeal,
   setPipelineLoading,
-  setPipelineError
+  setPipelineError,
+  resetFromSeed
 } = pipelineSlice.actions;
 const selectAllDeals = (state) => state.pipeline.deals;
 const selectDealsByStage = (stage) => (state) => state.pipeline.deals.filter((d) => d.stage === stage);
@@ -68,5 +74,6 @@ export {
   selectDealsByStage,
   setPipelineError,
   setPipelineLoading,
-  updateDeal
+  updateDeal,
+  resetFromSeed
 };

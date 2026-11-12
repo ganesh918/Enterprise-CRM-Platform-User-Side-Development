@@ -45,6 +45,13 @@ const leadsSlice = createSlice({
     deleteLead(state, action) {
       state.items = state.items.filter((l) => l.id !== action.payload);
     },
+    resetFromSeed(state) {
+      state.items = initialLeads;
+      state.filter = "all";
+      state.search = "";
+      state.loading = false;
+      state.error = null;
+    },
     updateLeadStatus(state, action) {
       const lead = state.items.find((l) => l.id === action.payload.id);
       if (lead) {
@@ -62,7 +69,8 @@ const {
   addLead,
   updateLead,
   deleteLead,
-  updateLeadStatus
+  updateLeadStatus,
+  resetFromSeed
 } = leadsSlice.actions;
 const selectAllLeads = (state) => state.leads.items;
 const selectLeadsFilter = (state) => state.leads.filter;
@@ -99,5 +107,6 @@ export {
   setLeadsError,
   setLeadsLoading,
   updateLead,
-  updateLeadStatus
+  updateLeadStatus,
+  resetFromSeed
 };

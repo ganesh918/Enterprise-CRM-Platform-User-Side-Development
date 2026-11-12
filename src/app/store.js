@@ -9,6 +9,7 @@ import profileReducer from "../features/profile/profileSlice";
 import tasksReducer from "../features/tasks/tasksSlice";
 import uiReducer from "../features/ui/uiSlice";
 import { loadPersistedState, savePersistedState } from "./persist";
+import { attachWorkspaceGuard } from "./workspaceReseed";
 const rootReducer = {
   auth: authReducer,
   leads: leadsReducer,
@@ -35,6 +36,7 @@ const store = configureStore({
 store.subscribe(() => {
   savePersistedState(store.getState());
 });
+attachWorkspaceGuard(store);
 export {
   store
 };

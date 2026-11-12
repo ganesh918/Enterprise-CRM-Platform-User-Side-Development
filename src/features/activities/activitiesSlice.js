@@ -34,6 +34,12 @@ const activitiesSlice = createSlice({
     updateActivity(state, action) {
       const index = state.items.findIndex((a) => a.id === action.payload.id);
       if (index !== -1) state.items[index] = action.payload;
+    },
+    resetFromSeed(state) {
+      state.items = initialActivities;
+      state.typeFilter = "all";
+      state.loading = false;
+      state.error = null;
     }
   }
 });
@@ -43,7 +49,8 @@ const {
   setActivitiesError,
   addActivity,
   toggleActivityComplete,
-  updateActivity
+  updateActivity,
+  resetFromSeed
 } = activitiesSlice.actions;
 const selectAllActivities = (state) => state.activities.items;
 const selectFilteredActivities = createSelector(
@@ -71,5 +78,6 @@ export {
   setActivitiesLoading,
   setActivityTypeFilter,
   toggleActivityComplete,
-  updateActivity
+  updateActivity,
+  resetFromSeed
 };

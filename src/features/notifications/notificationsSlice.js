@@ -66,10 +66,19 @@ const notificationsSlice = createSlice({
     },
     hydrateNotifications(state, action) {
       state.items = action.payload;
+    },
+    resetFromSeed(state) {
+      state.items = initialNotifications;
     }
   }
 });
-const { markRead, markAllRead, addNotification, hydrateNotifications } = notificationsSlice.actions;
+const {
+  markRead,
+  markAllRead,
+  addNotification,
+  hydrateNotifications,
+  resetFromSeed
+} = notificationsSlice.actions;
 const selectAllNotifications = (state) => state.notifications.items;
 const selectUnreadCount = (teamMemberId) => (state) => {
   if (!teamMemberId) return 0;
@@ -85,6 +94,7 @@ export {
   initialNotifications,
   markAllRead,
   markRead,
+  resetFromSeed,
   selectAllNotifications,
   selectUnreadCount
 };
