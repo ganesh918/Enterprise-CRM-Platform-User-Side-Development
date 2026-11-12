@@ -7,9 +7,13 @@ import {
   resolveWorkspaceTeamMemberId,
 } from '../lib/userScope'
 
-export const STORAGE_KEY = 'nexus-crm-user-v3'
+export const STORAGE_KEY = 'nexus-crm-user-v4'
 
-const LEGACY_CRM_KEYS = ['nexus-crm-user-v2', 'nexus-crm-user']
+const LEGACY_CRM_KEYS = [
+  'nexus-crm-user-v2',
+  'nexus-crm-user-v3',
+  'nexus-crm-user',
+]
 
 function isSliceWithItems(value) {
   return (
@@ -116,6 +120,10 @@ export function clearPersistedCrmState() {
 export function loadPersistedState() {
   purgeLegacyCrmStorage()
 
+  if (import.meta.env.PROD) {
+    return undefined
+  }
+
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return undefined
@@ -147,6 +155,10 @@ export function loadPersistedState() {
 }
 
 export function savePersistedState(state) {
+  if (import.meta.env.PROD) {
+    return
+  }
+
   try {
     const payload = {
       leads: state.leads,

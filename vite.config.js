@@ -22,12 +22,12 @@ export default defineConfig({
   base: '/',
   plugins: [react(), tailwindcss(), userPanelBanner()],
   server: {
-    port: 5310,
+    port: 5174,
     strictPort: false,
     open: '/login',
   },
   preview: {
-    port: 5310,
+    port: 5174,
     strictPort: false,
   },
 })

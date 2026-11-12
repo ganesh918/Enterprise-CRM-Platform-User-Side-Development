@@ -22,7 +22,7 @@ Sign in with **any valid email** and **any non-empty password** (optional signup
 
 | App | Folder | Default URL | Look for |
 |-----|--------|-------------|----------|
-| **User Panel** (this project) | `Enterprise CRM Platform – User Side Development` | **http://localhost:5310** | Green theme, **USER PANEL** badge, sidebar links: Reports, Notifications, Profile |
+| **User Panel** (this project) | `Enterprise CRM Platform – User Side Development` | **http://localhost:5174** | Green theme, **USER PANEL** badge, sidebar links: Reports, Notifications, Profile |
 | Admin / Enterprise platform | `Enterprise CRM Platform` | http://localhost:5173 | Cyan/purple theme, title “Enterprise Platform”, no Reports/Notifications |
 
 If you see the old admin UI, you are on the wrong port or folder. Stop other `npm run dev` tasks and run this project only:
@@ -32,7 +32,7 @@ cd "C:\Users\GaneshReddy\Desktop\Enterprise CRM Platform – User Side Developme
 npm run dev
 ```
 
-Then open **http://localhost:5310/login**.
+Then open **http://localhost:5174/login** (stop extra `vite` terminals so you are not on an old port).
 
 ## Deploy on Vercel
 
@@ -52,7 +52,7 @@ After GitHub is connected, redeploy **main**. Open your site at **`/`** or **`/l
 ### Localhost vs Vercel looks different?
 
 1. **Redeploy** after the latest `vercel.json` (static `/assets/*` must not rewrite to HTML).
-2. **Same data:** CRM lists live in browser `localStorage` (`nexus-crm-user-v3`). Each origin (localhost vs `*.vercel.app`) has its own storage. After deploy, sign in on Vercel once — the app reseeds if saved data does not match your workspace (`tm_2` by default). Use the **same email** on both for identical scoping.
+2. **Same data:** On **Vercel**, CRM demo data always comes from the built-in seed (not saved lists). On **localhost**, lists may be cached per port (`localhost:5174` ≠ `localhost:5310`). Use **one** dev URL (`5174`) and the **same login email** as Vercel. To reset local edits: open `/login?reset=1` or clear site data for that port.
 3. **Same login:** use the same email on both; role shows as **CRM User** by default.
 4. **Test production build locally:** `npm run build` then `npm run preview` → should match Vercel.
 
