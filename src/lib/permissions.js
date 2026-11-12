@@ -1,4 +1,15 @@
 const ROLE_MODULES = {
+  crm_user: [
+    "dashboard",
+    "leads",
+    "pipeline",
+    "customers",
+    "tasks",
+    "activities",
+    "reports",
+    "notifications",
+    "profile"
+  ],
   employee: [
     "dashboard",
     "leads",
@@ -34,10 +45,17 @@ const ROLE_MODULES = {
 function normalizeRole(role) {
   const r = role?.toLowerCase() ?? "";
   if (r.includes("manager") || r.includes("director")) return "manager";
+  if (r.includes("crm user") || r === "crm_user") return "crm_user";
   if (r.includes("sales") || r.includes("executive") || r.includes("sdr"))
     return "sales_rep";
-  if (r === "sales_rep" || r === "employee" || r === "manager") return r;
-  return "sales_rep";
+  if (
+    r === "crm_user" ||
+    r === "sales_rep" ||
+    r === "employee" ||
+    r === "manager"
+  )
+    return r;
+  return "crm_user";
 }
 function canAccessModule(role, module) {
   const normalized = normalizeRole(role);

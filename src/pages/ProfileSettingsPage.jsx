@@ -39,7 +39,7 @@ export function ProfileSettingsPage() {
 
   const [name, setName] = useState(user?.name ?? '')
   const [email, setEmail] = useState(user?.email ?? '')
-  const [accessLevel, setAccessLevel] = useState(user?.userRole ?? 'sales_rep')
+  const [accessLevel, setAccessLevel] = useState(user?.userRole ?? 'crm_user')
   const [phone, setPhone] = useState(settings.phone)
   const [timezone, setTimezone] = useState(settings.timezone)
   const [emailDigest, setEmailDigest] = useState(settings.emailDigest)
@@ -156,6 +156,7 @@ export function ProfileSettingsPage() {
           value={accessLevel}
           onChange={(e) => setAccessLevel(e.target.value)}
         >
+          <option value="crm_user">CRM User (default)</option>
           <option value="employee">Employee</option>
           <option value="sales_rep">Sales representative</option>
           <option value="manager">Manager (team overview)</option>

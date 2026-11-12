@@ -1,9 +1,10 @@
 import { USERS_REGISTRY_KEY } from '../constants/auth'
 import { resolveWorkspaceTeamMemberId } from './userScope'
 
-const DEFAULT_USER_ROLE = 'sales_rep'
+const DEFAULT_USER_ROLE = 'crm_user'
 
 const ROLE_LABELS = {
+  crm_user: 'CRM User',
   employee: 'Employee',
   sales_rep: 'Sales Representative',
   manager: 'Sales Manager',
@@ -38,7 +39,7 @@ export function registerUser(input) {
     name: input.name,
     email,
     password: input.password,
-    role: ROLE_LABELS[DEFAULT_USER_ROLE],
+    role: 'CRM User',
     userRole: DEFAULT_USER_ROLE,
     teamMemberId: resolveWorkspaceTeamMemberId(email),
     createdAt: new Date().toISOString(),
@@ -56,7 +57,7 @@ export function updateUserPassword(email, newPassword) {
       name: displayNameFromEmail(normalized),
       email: normalized,
       password: newPassword,
-      role: ROLE_LABELS[DEFAULT_USER_ROLE],
+      role: 'CRM User',
       userRole: DEFAULT_USER_ROLE,
       teamMemberId: resolveWorkspaceTeamMemberId(normalized),
       createdAt: new Date().toISOString(),
@@ -123,6 +124,8 @@ export function resolveUserRole(user) {
   const r = (user?.role ?? '').toLowerCase()
   if (r === 'manager' || r.includes('director')) return 'manager'
   if (r === 'employee') return 'employee'
+  if (r.includes('crm user') || r === 'crm_user') return 'crm_user'
+  if (r.includes('sales')) return 'sales_rep'
   return DEFAULT_USER_ROLE
 }
 

@@ -5,14 +5,16 @@ import { resolveUserRole, roleLabel } from '../../lib/authUsers'
 
 function normalizeUser(parsed) {
   if (!parsed?.email) return null
-  const userRole = resolveUserRole(parsed)
+  let userRole = resolveUserRole(parsed)
   const teamMemberId =
     parsed.teamMemberId ?? resolveWorkspaceTeamMemberId(parsed.email)
+  const role =
+    userRole === 'crm_user' ? 'CRM User' : parsed.role || roleLabel(userRole)
   return {
     ...parsed,
     userRole,
     teamMemberId,
-    role: parsed.role || roleLabel(userRole),
+    role,
   }
 }
 
