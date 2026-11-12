@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Segoe UI', system-ui, sans-serif;
+
+  --color-surface-950: #071210;
+  --color-surface-900: #0c1a17;
+  --color-surface-800: #122620;
+  --color-surface-700: #1a332c;
+  --color-surface-600: #244539;
+  --color-accent-emerald: #34d399;
+  --color-accent-sky: #38bdf8;
+  --color-accent-rose: #fb7185;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    background: var(--color-surface-950);
+    color: #e2e8f0;
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-height: 100vh;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    text-align: left;
+    border: none;
+  }
+
+  ::selection {
+    background: rgba(52, 211, 153, 0.35);
+    color: #fff;
+  }
+
+  select {
+    color-scheme: dark;
+  }
+
+  select option {
+    background-color: var(--color-surface-800);
+    color: #e2e8f0;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+  }
+
+  .glass-panel-strong {
+    @apply border border-white/15 bg-white/[0.07] backdrop-blur-2xl;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-emerald-300 via-sky-300 to-teal-200 bg-clip-text text-transparent;
+  }
+
+  .glow-ring {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 40px rgba(52, 211, 153, 0.15);
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      110deg,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0) 60%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2.5s ease-in-out infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.hero-orb {
+  animation: float 6s ease-in-out infinite;
+}
+
+.recharts-default-tooltip {
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: rgba(12, 26, 23, 0.94) !important;
+  backdrop-filter: blur(12px);
+}
