@@ -1,5 +1,5 @@
 import { AUTH_STORAGE_KEY } from '../constants/auth'
-import { initialNotifications } from '../features/notifications/notificationsSlice'
+import { initialNotifications } from '../data/notificationsSeed'
 import { resolveUserRole } from '../lib/authUsers'
 import {
   DEFAULT_WORKSPACE_MEMBER_ID,

@@ -8,6 +8,7 @@ import {
   selectCurrentTeamMemberId
 } from "../../features/auth/authSlice";
 import { selectUnreadCount } from "../../features/notifications/notificationsSlice";
+import { hasFullTeamDataView } from "../../lib/userScope";
 import { selectSidebarCollapsed } from "../../features/ui/uiSlice";
 import { cn } from "../../lib/utils";
 import { Avatar } from "../ui/Avatar";
@@ -19,7 +20,8 @@ function TopBar() {
   const collapsed = useAppSelector(selectSidebarCollapsed);
   const user = useAppSelector(selectAuthUser);
   const teamMemberId = useAppSelector(selectCurrentTeamMemberId);
-  const unread = useAppSelector(selectUnreadCount(teamMemberId));
+  const fullTeamView = hasFullTeamDataView(user?.userRole ?? user?.role);
+  const unread = useAppSelector(selectUnreadCount(teamMemberId, fullTeamView));
   return /* @__PURE__ */ jsxs(
     "header",
     {
