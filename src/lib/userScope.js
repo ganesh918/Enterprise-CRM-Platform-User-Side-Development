@@ -1,4 +1,5 @@
 import { teamMembers } from '../data/seed'
+import { normalizeRole } from './permissions'
 
 /** Default assignee so any login sees a rich, consistent personal workspace. */
 export const DEFAULT_WORKSPACE_MEMBER_ID = 'tm_2'
@@ -17,6 +18,11 @@ export function resolveWorkspaceTeamMemberId(email) {
 export function isManagerRole(role) {
   const r = role?.toLowerCase() ?? ''
   return r === 'manager' || r.includes('manager') || r.includes('director')
+}
+
+/** Full CRM dataset for dashboard parity (Vercel = localhost). Only Employee is queue-scoped. */
+export function hasFullTeamDataView(role) {
+  return normalizeRole(role) !== 'employee'
 }
 
 export function scopeByOwner(

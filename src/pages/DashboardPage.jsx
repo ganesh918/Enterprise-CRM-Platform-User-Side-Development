@@ -40,7 +40,7 @@ import {
   selectAuthUser,
   selectCurrentTeamMemberId
 } from "../features/auth/authSlice";
-import { isManagerRole, scopeByOwner } from "../lib/userScope";
+import { hasFullTeamDataView, scopeByOwner } from "../lib/userScope";
 import { PIPELINE_STAGES } from "../constants/crm";
 import { PageHeader } from "../components/ui/PageHeader";
 import { StatCard } from "../components/ui/StatCard";
@@ -84,7 +84,7 @@ function stageLabel(stage) {
 function DashboardPage() {
   const user = useAppSelector(selectAuthUser);
   const teamMemberId = useAppSelector(selectCurrentTeamMemberId);
-  const managerView = isManagerRole(user?.userRole ?? user?.role);
+  const managerView = hasFullTeamDataView(user?.userRole ?? user?.role);
   const allLeads = useAppSelector(selectAllLeads);
   const allDeals = useAppSelector(selectAllDeals);
   const allActivities = useAppSelector(selectAllActivities);

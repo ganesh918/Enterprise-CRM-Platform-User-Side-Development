@@ -23,14 +23,14 @@ import { selectAllActivities } from "../features/activities/activitiesSlice";
 import { selectAllLeads } from "../features/leads/leadsSlice";
 import { selectAllDeals } from "../features/pipeline/pipelineSlice";
 import { selectAllTasks } from "../features/tasks/tasksSlice";
-import { isManagerRole, scopeByOwner } from "../lib/userScope";
+import { hasFullTeamDataView, scopeByOwner } from "../lib/userScope";
 import { formatCurrency } from "../lib/utils";
 import { Percent, Target, TrendingUp, CheckSquare } from "lucide-react";
 const pieColors = ["#34d399", "#38bdf8", "#34d399", "#fbbf24", "#fb7185"];
 function ReportsPage() {
   const user = useAppSelector(selectAuthUser);
   const teamMemberId = useAppSelector(selectCurrentTeamMemberId);
-  const managerView = isManagerRole(user?.userRole ?? user?.role);
+  const managerView = hasFullTeamDataView(user?.userRole ?? user?.role);
   const leads = useAppSelector(selectAllLeads);
   const deals = useAppSelector(selectAllDeals);
   const tasks = useAppSelector(selectAllTasks);

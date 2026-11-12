@@ -6,10 +6,10 @@ import { selectAllDeals } from "../features/pipeline/pipelineSlice";
 import { selectAllCustomers } from "../features/customers/customersSlice";
 import { selectAllActivities } from "../features/activities/activitiesSlice";
 import { selectAuthUser, selectCurrentTeamMemberId } from "../features/auth/authSlice";
-import { isManagerRole, scopeByOwner } from "./userScope";
+import { hasFullTeamDataView, scopeByOwner } from "./userScope";
 function managerViewFromState(state) {
   const user = selectAuthUser(state);
-  return isManagerRole(user?.userRole ?? user?.role);
+  return hasFullTeamDataView(user?.userRole ?? user?.role);
 }
 const selectScopedLeads = createSelector(
   [selectFilteredLeads, selectCurrentTeamMemberId, managerViewFromState],

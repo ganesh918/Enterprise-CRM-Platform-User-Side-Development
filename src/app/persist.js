@@ -3,7 +3,7 @@ import { initialNotifications } from '../features/notifications/notificationsSli
 import { resolveUserRole } from '../lib/authUsers'
 import {
   DEFAULT_WORKSPACE_MEMBER_ID,
-  isManagerRole,
+  hasFullTeamDataView,
   resolveWorkspaceTeamMemberId,
 } from '../lib/userScope'
 
@@ -62,7 +62,7 @@ export function readHydrationAuth() {
     const userRole = resolveUserRole(parsed)
     return {
       teamMemberId,
-      managerView: isManagerRole(userRole),
+      managerView: hasFullTeamDataView(userRole),
     }
   } catch {
     return {

@@ -2,7 +2,7 @@ import { AUTH_STORAGE_KEY } from '../constants/auth'
 import { migrateStoredAuth } from '../features/auth/authSlice'
 import { clearPersistedCrmState, purgeLegacyCrmStorage } from './persist'
 
-export const CRM_DATA_VERSION = '4'
+export const CRM_DATA_VERSION = '5'
 const CRM_DATA_VERSION_KEY = 'nexus-crm-data-version'
 
 function clearWorkspaceFromQuery() {

@@ -5,7 +5,7 @@ import { resetFromSeed as resetNotificationsFromSeed } from '../features/notific
 import { resetFromSeed as resetPipelineFromSeed } from '../features/pipeline/pipelineSlice'
 import { resetFromSeed as resetTasksFromSeed } from '../features/tasks/tasksSlice'
 import { resolveUserRole } from '../lib/authUsers'
-import { isManagerRole, scopeByOwner } from '../lib/userScope'
+import { hasFullTeamDataView, scopeByOwner } from '../lib/userScope'
 import { clearPersistedCrmState } from './persist'
 
 export function workspaceNeedsReseed(state) {
@@ -13,7 +13,7 @@ export function workspaceNeedsReseed(state) {
   if (!state.auth.isAuthenticated || !user) return false
 
   const userRole = resolveUserRole(user)
-  if (isManagerRole(userRole)) return false
+  if (hasFullTeamDataView(userRole)) return false
 
   const teamMemberId = user.teamMemberId
   if (!teamMemberId) return false

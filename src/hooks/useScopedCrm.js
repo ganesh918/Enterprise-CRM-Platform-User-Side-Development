@@ -9,11 +9,11 @@ import { selectAllCustomers } from "../features/customers/customersSlice";
 import { selectAllLeads } from "../features/leads/leadsSlice";
 import { selectAllDeals } from "../features/pipeline/pipelineSlice";
 import { selectAllTasks } from "../features/tasks/tasksSlice";
-import { isManagerRole, scopeByOwner } from "../lib/userScope";
+import { hasFullTeamDataView, scopeByOwner } from "../lib/userScope";
 function useScopedCrm() {
   const user = useAppSelector(selectAuthUser);
   const teamMemberId = useAppSelector(selectCurrentTeamMemberId);
-  const managerView = isManagerRole(user?.userRole ?? user?.role);
+  const managerView = hasFullTeamDataView(user?.userRole ?? user?.role);
   const allLeads = useAppSelector(selectAllLeads);
   const allDeals = useAppSelector(selectAllDeals);
   const allCustomers = useAppSelector(selectAllCustomers);

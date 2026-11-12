@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   DEFAULT_WORKSPACE_MEMBER_ID,
+  hasFullTeamDataView,
   resolveWorkspaceTeamMemberId,
   scopeByOwner,
 } from './userScope'
@@ -25,5 +26,11 @@ describe('userScope', () => {
 
   it('returns all items for managers', () => {
     expect(scopeByOwner(items, 'tm_2', true)).toHaveLength(2)
+  })
+
+  it('uses full team data for crm_user and employee-only queue scope', () => {
+    expect(hasFullTeamDataView('crm_user')).toBe(true)
+    expect(hasFullTeamDataView('manager')).toBe(true)
+    expect(hasFullTeamDataView('employee')).toBe(false)
   })
 })
