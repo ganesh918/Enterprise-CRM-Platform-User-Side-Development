@@ -34,6 +34,21 @@ npm run dev
 
 Then open **http://localhost:5310/login**.
 
+## Deploy on Vercel
+
+Use the **repository root** (this folder) as the Vercel project root.
+
+| Setting | Value |
+|---------|--------|
+| Framework Preset | **Vite** |
+| Build Command | `npm run build` |
+| Output Directory | `dist` |
+| Install Command | `npm install` |
+
+This repo includes `vercel.json` so React Router paths (`/login`, `/leads`, etc.) rewrite to `index.html` instead of returning **404 NOT_FOUND**.
+
+After GitHub is connected, redeploy **main**. Open your site at **`/`** or **`/login`**.
+
 ## Scripts
 
 ```bash
